@@ -1,3 +1,4 @@
+import { DeleteUserInput } from './dto/delete-user.input';
 import { CreateUserInput } from './dto/create-user.input';
 import { User } from './user.entity';
 import {
@@ -38,5 +39,11 @@ export class UserService {
     }
 
     return userSaved;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  async deleteUser(data: DeleteUserInput): Promise<Boolean> {
+    const user = await this.userRepository.delete(data);
+    return user.affected > 0;
   }
 }

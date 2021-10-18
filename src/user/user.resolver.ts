@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-types */
+import { DeleteUserInput } from './dto/delete-user.input';
 import { CreateUserInput } from './dto/create-user.input';
 import { UserService } from './user.service';
 import { Args, Mutation, Resolver, Query } from '@nestjs/graphql';
@@ -25,5 +27,15 @@ export class UserResolver {
     return user;
   }
 
-  // TO-DO MUTATION DELETE AND UPDATE
+  @Mutation(() => Boolean)
+  async deleteUser(@Args('data') data: DeleteUserInput): Promise<Boolean> {
+    const user = await this.userService.deleteUser(data);
+    if (!user) {
+      return false;
+    }
+
+    return true;
+  }
+
+  // TO-DO MUTATION UPDATE
 }
