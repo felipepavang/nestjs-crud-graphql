@@ -10,9 +10,9 @@ export class User {
 
   @Column()
   @Field({ nullable: true })
-  name: string;
+  name?: string;
 
   @Column()
   @Field({ nullable: true })
-  email: string;
+  email?: string;
 }
