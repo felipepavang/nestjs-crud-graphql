@@ -1,3 +1,4 @@
+import { UpdateUserInput } from './dto/update-user.input';
 /* eslint-disable @typescript-eslint/ban-types */
 import { DeleteUserInput } from './dto/delete-user.input';
 import { CreateUserInput } from './dto/create-user.input';
@@ -37,5 +38,13 @@ export class UserResolver {
     return true;
   }
 
-  // TO-DO MUTATION UPDATE
+  @Mutation(() => User)
+  async updateUser(
+    @Args('id') id: string,
+    @Args('data') data: UpdateUserInput,
+  ): Promise<User> {
+    const user = await this.userService.updateUser(id, data);
+
+    return user;
+  }
 }
